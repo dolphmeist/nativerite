@@ -21,8 +21,8 @@
     --sans: 'DM Sans', sans-serif;
   }
 
-  html { scroll-behavior: smooth; }
-  body { background: var(--warm-white); color: var(--dark); font-family: var(--sans); font-size: 15px; line-height: 1.6; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { background: var(--warm-white); color: var(--dark); font-family: var(--sans); font-size: 15px; line-height: 1.6; overflow-x: hidden; max-width: 100%; }
   a { text-decoration: none; color: inherit; }
   img { display: block; max-width: 100%; }
 
@@ -55,17 +55,19 @@
     align-items: center;
     justify-content: space-between;
     gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .logo {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 300;
-    letter-spacing: 0.15em;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--dark);
     white-space: nowrap;
   }
-  .logo span { font-weight: 500; }
+  .logo span { font-weight: 400; }
   nav { display: flex; gap: 32px; align-items: center; }
   nav a {
     font-size: 13px;
@@ -579,7 +581,70 @@
     font-size: 12px; color: var(--light-text);
   }
 
-  /* ── PRODUCT PLACEHOLDER IMAGES ── */
+  /* ── MOBILE HEADER ICONS ── */
+  .mobile-header-icons {
+    display: none;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+  .mobile-header-icons button {
+    background: none; border: none; cursor: pointer;
+    color: var(--dark); padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .hamburger-lines {
+    display: flex; flex-direction: column; gap: 5px; width: 22px;
+  }
+  .hamburger-lines span {
+    display: block; height: 1.5px; background: var(--dark);
+    width: 100%; transition: all .3s;
+  }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .mobile-nav {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+  }
+  .mobile-nav.open { display: block; }
+  .mobile-nav-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.4);
+  }
+  .mobile-nav-drawer {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 280px; background: var(--warm-white);
+    padding: 60px 32px 40px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .mobile-nav-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    font-size: 24px; color: var(--dark);
+  }
+  .mobile-nav-drawer a {
+    font-family: var(--serif); font-size: 24px;
+    font-weight: 300; color: var(--dark);
+    padding: 10px 0; border-bottom: 1px solid var(--blush);
+    display: block;
+  }
+
+  /* ── PRODUCT CAROUSEL (mobile) ── */
+  .products-carousel-wrapper { position: relative; }
+  .carousel-arrows {
+    display: none;
+    justify-content: flex-end; gap: 8px;
+    margin-bottom: 16px;
+  }
+  .carousel-arrow {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--dark);
+    background: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--dark); transition: background .2s, color .2s;
+  }
+  .carousel-arrow:hover { background: var(--dark); color: #fff; }
   .img-placeholder {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -613,10 +678,31 @@
     .footer-inner { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    .header-inner { padding: 0 20px; }
+    .header-inner { padding: 0 16px; gap: 8px; }
     nav { display: none; }
-    .hero-outer { padding: 12px 12px 0; }
-    .hero { grid-template-columns: 1fr; grid-template-rows: 75vw auto; min-height: unset; }
+    .header-right { display: none; }
+    .mobile-header-icons { display: flex; }
+    /* Product carousel on mobile */
+    .carousel-arrows { display: flex; }
+    #products-grid {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+    #products-grid::-webkit-scrollbar { display: none; }
+    #products-grid .product-card {
+      flex: 0 0 80vw;
+      max-width: 80vw;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .hero-outer { padding: 0; }
+    .hero { grid-template-columns: 1fr; grid-template-rows: 110vw auto; min-height: unset; }
     .hero-video-side { min-height: unset; overflow: hidden; }
     .hero-content { padding: 28px 20px 36px; background: #C4A882; }
     .hero-headline { display: none; }
@@ -648,7 +734,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a href="#" class="logo"><span>ALMA</span> Babycare</a>
+    <a href="#" class="logo">Nativerite</a>
     <nav>
       <a href="#">Shop Products</a>
       <a href="#">Care Routine</a>
@@ -656,6 +742,7 @@
       <a href="#">Science</a>
       <a href="#">Journal</a>
     </nav>
+    <!-- Desktop right -->
     <div class="header-right">
       <button>EN &nbsp;▾</button>
       <button>€ &nbsp;▾</button>
@@ -664,8 +751,35 @@
         Bag (0)
       </button>
     </div>
+    <!-- Mobile right -->
+    <div class="mobile-header-icons">
+      <button aria-label="Account">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button aria-label="Bag">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+      <button aria-label="Menu" onclick="document.getElementById('mobileNav').classList.add('open')">
+        <div class="hamburger-lines">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
   </div>
 </header>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-overlay" onclick="document.getElementById('mobileNav').classList.remove('open')"></div>
+  <div class="mobile-nav-drawer">
+    <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+    <a href="#">Shop Products</a>
+    <a href="#">Care Routine</a>
+    <a href="#">The Story</a>
+    <a href="#">Science</a>
+    <a href="#">Journal</a>
+  </div>
+</div>
 
 <div class="hero-outer">
 <section class="hero">
@@ -706,7 +820,17 @@
       <h2 class="section-title">Bestselling <em>products</em></h2>
     </div>
   </div>
-  <div id="products-grid" class="products-grid"></div>
+  <div class="products-carousel-wrapper">
+    <div class="carousel-arrows">
+      <button class="carousel-arrow" onclick="scrollCarousel(-1)" aria-label="Previous">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16"><line x1="14" y1="8" x2="2" y2="8"/><polyline points="7,3 2,8 7,13"/></svg>
+      </button>
+      <button class="carousel-arrow" onclick="scrollCarousel(1)" aria-label="Next">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+      </button>
+    </div>
+    <div id="products-grid" class="products-grid"></div>
+  </div>
 </section>
 
 <!-- TRUST BAR -->
@@ -874,7 +998,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="logo"><span>ALMA</span> Babycare</span>
+      <span class="logo" style="font-size:18px;">Nativerite</span>
       <p>Organic Mom &amp; Babycare from Vienna. Crafted with love for the most precious moments of life.</p>
     </div>
     <div>
@@ -963,6 +1087,11 @@
       </div>
     </a>
   `).join('');
+  function scrollCarousel(dir) {
+    const grid = document.getElementById('products-grid');
+    const cardWidth = grid.querySelector('.product-card').offsetWidth + 16;
+    grid.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+  }
 </script>
 </body>
 </html>
