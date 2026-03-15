@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ALMA Babycare – Organic Mom & Babycare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F8F3EE;
+    --warm-white: #FBF8F4;
+    --blush: #E8D9CC;
+    --sage: #8A9E8C;
+    --dark: #2C2520;
+    --mid: #6B5C52;
+    --light-text: #9A8B83;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--dark); font-family: var(--sans); font-size: 15px; line-height: 1.6; }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .announcement {
+    background: var(--dark);
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--blush);
+  }
+  .header-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dark);
+    white-space: nowrap;
+  }
+  .logo span { font-weight: 500; }
+  nav { display: flex; gap: 32px; align-items: center; }
+  nav a {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--mid);
+    font-weight: 400;
+    transition: color .2s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--dark);
+    transition: width .25s;
+  }
+  nav a:hover { color: var(--dark); }
+  nav a:hover::after { width: 100%; }
+  .header-right { display: flex; align-items: center; gap: 20px; }
+  .header-right button {
+    background: none; border: none; cursor: pointer;
+    color: var(--mid); font-family: var(--sans);
+    font-size: 13px; letter-spacing: .05em;
+  }
+  .cart-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 18px;
+    border: 1px solid var(--dark) !important;
+    border-radius: 0;
+    color: var(--dark) !important;
+    font-size: 13px !important;
+    letter-spacing: .08em;
+    cursor: pointer;
+    background: none;
+    font-family: var(--sans);
+    transition: background .2s, color .2s;
+  }
+  .cart-btn:hover { background: var(--dark); color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero-outer {
+    padding: 40px 40px 0;
+    background: var(--warm-white);
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: 53% 47%;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: 80vh;
+    overflow: hidden;
+  }
+  .hero-video-side {
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+    border-radius: 0;
+  }
+  .hero-video-side video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Placeholder shown until a real video is added */
+  .hero-video-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: #2a2a2a;
+    color: rgba(255,255,255,0.4);
+    gap: 16px;
+  }
+  .hero-video-placeholder svg { opacity: 0.5; }
+  .hero-video-placeholder span {
+    font-size: 13px; letter-spacing: 0.12em;
+    text-transform: uppercase; font-family: var(--sans);
+  }
+  .hero-content {
+    background: #C4A882;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+  }
+  .hero h1 {
+    font-family: var(--sans);
+    font-size: clamp(26px, 2.8vw, 42px);
+    font-weight: 300;
+    line-height: 1.25;
+    color: #fff;
+    margin-bottom: 56px;
+  }
+  .hero-looking {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    margin-bottom: 24px;
+    font-family: var(--sans);
+  }
+  .hero-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .hero-cat {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 26px;
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 50px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    transition: background .2s, border-color .2s;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .hero-cat:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+  .hero-cat svg { flex-shrink: 0; }
+
+  /* ── SECTION TITLES ── */
+  .section-label {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 12px; font-weight: 500;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--dark);
+  }
+  .section-title em { font-style: italic; }
+  .view-all {
+    display: inline-block;
+    font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dark);
+    border-bottom: 1px solid var(--dark);
+    padding-bottom: 2px;
+    transition: opacity .2s;
+  }
+  .view-all:hover { opacity: 0.55; }
+
+  /* ── PRODUCTS ── */
+  .products-section {
+    padding: 80px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .products-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 48px;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .product-card { position: relative; cursor: pointer; }
+  .product-img-wrap {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+    aspect-ratio: 3/4;
+    margin-bottom: 16px;
+    border-radius: 16px;
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .5s cubic-bezier(.25,.46,.45,.94);
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.04); }
+  .badge {
+    position: absolute; top: 12px; left: 12px;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 4px 10px;
+    background: var(--dark); color: #fff;
+    font-weight: 500;
+  }
+  .badge.new { background: var(--sage); }
+  .badge.back { background: var(--blush); color: var(--dark); }
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .product-info { min-width: 0; }
+  .product-name {
+    font-family: var(--serif);
+    font-size: 18px; font-weight: 400;
+    color: var(--dark); margin-bottom: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .product-price { font-size: 13px; color: var(--mid); white-space: nowrap; }
+  .product-btns {
+    display: flex; flex-direction: column; gap: 6px;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .product-card:hover .product-btns { opacity: 1; }
+  .btn-add, .btn-quick {
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; white-space: nowrap;
+    padding: 7px 14px; border-radius: 50px;
+    cursor: pointer; transition: background .2s, color .2s;
+  }
+  .btn-add {
+    background: var(--dark); color: #fff; border: 1px solid var(--dark);
+  }
+  .btn-add:hover { background: #4a3d35; border-color: #4a3d35; }
+  .btn-quick {
+    background: transparent; color: var(--dark); border: 1px solid var(--dark);
+  }
+  .btn-quick:hover { background: var(--dark); color: #fff; }
+
+  @media (max-width: 480px) {
+    .product-footer { flex-direction: column; align-items: flex-start; }
+    .product-btns { flex-direction: row; }
+  }
+
+  /* ── TRUST BADGES ── */
+  .trust-bar {
+    position: relative;
+    padding: 36px 40px;
+    overflow: hidden;
+    background: var(--dark);
+  }
+  .trust-bar-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  /* Placeholder shown until real video is added */
+  .trust-bar-video-placeholder {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, #1a1410, #2C2520, #1a1410);
+  }
+  .trust-inner {
+    position: relative; z-index: 2;
+    max-width: 1300px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+  }
+  .trust-divider { color: rgba(255,255,255,0.2); font-size: 20px; }
+  .trust-item {
+    display: flex; align-items: center; gap: 12px;
+    color: rgba(255,255,255,0.85);
+  }
+  .trust-num {
+    font-family: var(--serif);
+    font-size: 32px; font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    line-height: 1;
+  }
+  .trust-text {
+    font-size: 13px; letter-spacing: 0.05em;
+    font-weight: 300;
+  }
+
+  /* ── CARE ROUTINE ── */
+  .care-section {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+  }
+  .care-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    background: var(--blush);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 60px;
+    color: var(--mid);
+  }
+  .care-content {
+    background: var(--cream);
+    padding: 80px 60px;
+    display: flex; flex-direction: column;
+    justify-content: center;
+  }
+  .care-content .section-title { margin-bottom: 20px; }
+  .care-content p {
+    font-size: 15px; color: var(--mid);
+    max-width: 400px; margin-bottom: 36px;
+    line-height: 1.8;
+  }
+
+  /* ── ARTICLES ── */
+  .articles-section {
+    padding: 80px 40px;
+    max-width: 1300px; margin: 0 auto;
+  }
+  .articles-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px;
+  }
+  .articles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .article-card { cursor: pointer; }
+  .article-img {
+    width: 100%; aspect-ratio: 16/9;
+    object-fit: cover;
+    background: var(--blush);
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: block;
+    border-radius: 16px;
+  }
+  .article-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s;
+  }
+  .article-card:hover .article-img img { transform: scale(1.03); }
+  .article-tag {
+    font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 10px; font-weight: 500;
+  }
+  .article-card h3 {
+    font-family: var(--serif); font-size: 22px;
+    font-weight: 400; line-height: 1.3;
+    color: var(--dark); margin-bottom: 12px;
+  }
+  .article-card p { font-size: 14px; color: var(--mid); line-height: 1.7; margin-bottom: 16px; }
+  .read-link {
+    font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dark);
+    border-bottom: 1px solid var(--dark);
+    padding-bottom: 2px;
+    display: inline-block;
+  }
+
+  /* ── STORY ── */
+  .story-section {
+    background: var(--cream);
+    padding: 100px 40px;
+    text-align: center;
+  }
+  .story-section .section-label { justify-content: center; display: block; }
+  .story-section .section-title { margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .story-section p {
+    max-width: 500px; margin: 0 auto 40px;
+    color: var(--mid); font-size: 15px; line-height: 1.8;
+  }
+  .story-img-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 1300px; margin: 60px auto 0;
+  }
+  .story-img {
+    aspect-ratio: 2/3; object-fit: cover;
+    background: var(--blush);
+    width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 28px; color: var(--mid);
+    overflow: hidden;
+  }
+  .story-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 80px 40px;
+    max-width: 1300px; margin: 0 auto;
+  }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  .testimonial {
+    border-top: 1px solid var(--blush);
+    padding-top: 28px;
+  }
+  .testimonial-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--blush); margin-bottom: 16px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 22px; color: var(--mid);
+  }
+  .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .testimonial p {
+    font-family: var(--serif); font-size: 16px;
+    font-style: italic; line-height: 1.6;
+    color: var(--dark); margin-bottom: 16px;
+  }
+  .testimonial-name {
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--light-text);
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    position: relative; overflow: hidden;
+    min-height: 480px;
+    display: flex; align-items: center;
+    background: linear-gradient(to right, #2C2520 50%, #3D3028 100%);
+  }
+  .cta-bg {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+    background: linear-gradient(135deg, #8A9E8C, #C9B8A8);
+    opacity: 0.3;
+  }
+  .cta-content {
+    position: relative; z-index: 2;
+    padding: 80px;
+    max-width: 600px;
+  }
+  .cta-content .section-label { color: rgba(255,255,255,0.5); }
+  .cta-content .section-title { color: #fff; margin-bottom: 16px; }
+  .cta-content p { color: rgba(255,255,255,0.65); margin-bottom: 36px; font-size: 15px; line-height: 1.8; }
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 500;
+    transition: background .2s, color .2s;
+    cursor: pointer;
+  }
+  .cta-btn:hover { background: #fff; }
+
+  /* ── INSTAGRAM ── */
+  .insta-section { padding: 80px 40px; }
+  .insta-header {
+    max-width: 1300px; margin: 0 auto 40px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .insta-grid {
+    max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .insta-item {
+    aspect-ratio: 1;
+    background: var(--blush);
+    overflow: hidden; cursor: pointer;
+    position: relative;
+  }
+  .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+  .insta-item:hover img { transform: scale(1.06); }
+  .insta-overlay {
+    position: absolute; inset: 0;
+    background: rgba(44,37,32,0);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .3s;
+    color: #fff; font-size: 13px; letter-spacing: .08em;
+    opacity: 0;
+  }
+  .insta-item:hover .insta-overlay { background: rgba(44,37,32,0.4); opacity: 1; }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: var(--dark); padding: 80px 40px;
+    text-align: center;
+  }
+  .newsletter .section-title { color: #fff; margin-bottom: 12px; }
+  .newsletter p { color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 36px; font-size: 14px; line-height: 1.7; }
+  .newsletter-form {
+    display: flex; gap: 0; max-width: 460px; margin: 0 auto;
+  }
+  .newsletter-form input {
+    flex: 1; padding: 14px 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+    color: #fff; font-family: var(--sans); font-size: 14px;
+    outline: none;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.35); }
+  .newsletter-form button {
+    padding: 14px 28px; background: var(--blush);
+    border: none; cursor: pointer; color: var(--dark);
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; white-space: nowrap;
+    transition: background .2s;
+  }
+  .newsletter-form button:hover { background: #e0c9b8; }
+  .newsletter-note {
+    font-size: 12px; color: rgba(255,255,255,0.3);
+    margin-top: 16px; line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer { background: var(--cream); padding: 60px 40px 40px; }
+  .footer-inner {
+    max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 40px; padding-bottom: 48px;
+    border-bottom: 1px solid var(--blush);
+  }
+  .footer-brand .logo { font-size: 22px; margin-bottom: 16px; display: block; }
+  .footer-brand p { font-size: 13px; color: var(--mid); line-height: 1.7; max-width: 240px; }
+  footer h4 {
+    font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--dark);
+    margin-bottom: 20px; font-weight: 500;
+  }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul li a { font-size: 13px; color: var(--mid); transition: color .2s; }
+  footer ul li a:hover { color: var(--dark); }
+  .footer-bottom {
+    max-width: 1300px; margin: 0 auto;
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--light-text);
+  }
+
+  /* ── PRODUCT PLACEHOLDER IMAGES ── */
+  .img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 16px; color: var(--mid);
+    text-align: center; padding: 20px;
+    line-height: 1.4;
+  }
+  .ph-warm { background: linear-gradient(145deg, #E8D9CC, #D4C4B4); }
+  .ph-sage  { background: linear-gradient(145deg, #C8D4C4, #B4C4B0); }
+  .ph-blush { background: linear-gradient(145deg, #E4CDBF, #D4BAA8); }
+  .ph-stone { background: linear-gradient(145deg, #D8CECC, #C4B8B4); }
+  .ph-ivory { background: linear-gradient(145deg, #EDE4D8, #E0D4C4); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * {
+    animation: fadeUp .8s ease both;
+  }
+  .hero-content > *:nth-child(1) { animation-delay: .1s; }
+  .hero-content > *:nth-child(2) { animation-delay: .25s; }
+  .hero-content > *:nth-child(3) { animation-delay: .4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .header-inner { padding: 0 20px; }
+    nav { display: none; }
+    .hero-outer { padding: 12px 12px 0; }
+    .hero { grid-template-columns: 1fr; grid-template-rows: 75vw auto; min-height: unset; }
+    .hero-video-side { min-height: unset; overflow: hidden; }
+    .hero-content { padding: 28px 20px 36px; background: #C4A882; }
+    .hero-headline { display: none; }
+    .hero-looking { font-size: 22px; margin-bottom: 20px; }
+    .hero-cats { gap: 10px; }
+    .hero-cat { padding: 11px 20px; font-size: 11px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .product-btns { opacity: 1; flex-direction: row; }
+    .product-footer { flex-direction: column; align-items: flex-start; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .care-section { grid-template-columns: 1fr; }
+    .story-img-row { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .insta-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .trust-inner { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .newsletter-form { flex-direction: column; }
+    .products-section, .articles-section, .testimonials { padding: 60px 20px; }
+    .care-content { padding: 48px 28px; }
+    .cta-content { padding: 48px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">Spend 150€ and receive a free gift &nbsp;·&nbsp; Free shipping over 50€</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo"><span>ALMA</span> Babycare</a>
+    <nav>
+      <a href="#">Shop Products</a>
+      <a href="#">Care Routine</a>
+      <a href="#">The Story</a>
+      <a href="#">Science</a>
+      <a href="#">Journal</a>
+    </nav>
+    <div class="header-right">
+      <button>EN &nbsp;▾</button>
+      <button>€ &nbsp;▾</button>
+      <button class="cart-btn">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Bag (0)
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="hero-outer">
+<section class="hero">
+
+  <!-- LEFT: Video slot — replace src with your .mp4 file when ready -->
+  <div class="hero-video-side">
+    <!--
+      TO ADD YOUR VIDEO: replace the placeholder below with:
+      <video autoplay muted loop playsinline>
+        <source src="your-hero-video.mp4" type="video/mp4">
+      </video>
+    -->
+    <div class="hero-video-placeholder">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="white" stroke-width="1.5">
+        <circle cx="28" cy="28" r="26"/>
+        <polygon points="22,18 42,28 22,38" fill="white" stroke="none"/>
+      </svg>
+      <span>Your video goes here</span>
+      <span style="font-size:11px;opacity:.6;letter-spacing:.06em">autoplay · muted · looping</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: Text content -->
+  <div class="hero-content">
+    <h1 class="hero-headline">We understand the importance of clean skincare for both mother and baby during this special time</h1>
+    <p class="hero-looking">What are you looking for?</p>
+    <div id="hero-cats" class="hero-cats"></div>
+  </div>
+
+</section>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="products-header">
+    <div>
+      <p class="section-label">Our Collection</p>
+      <h2 class="section-title">Bestselling <em>products</em></h2>
+    </div>
+  </div>
+  <div id="products-grid" class="products-grid"></div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+
+  <!--
+    TO ADD YOUR VIDEO: replace the placeholder div below with:
+    <video class="trust-bar-video" autoplay muted loop playsinline>
+      <source src="your-trust-bar-video.mp4" type="video/mp4">
+    </video>
+  -->
+  <div class="trust-bar-video-placeholder"></div>
+
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-num">1</span><span class="trust-text">Made in Austria</span></div>
+    <span class="trust-divider">|</span>
+    <div class="trust-item"><span class="trust-num">2</span><span class="trust-text">Organic Certified</span></div>
+    <span class="trust-divider">|</span>
+    <div class="trust-item"><span class="trust-num">3</span><span class="trust-text">Clean Natural Skincare</span></div>
+    <span class="trust-divider">|</span>
+    <div class="trust-item"><span class="trust-num">4</span><span class="trust-text">Female Founded</span></div>
+    <span class="trust-divider">|</span>
+    <div class="trust-item"><span class="trust-num">5</span><span class="trust-text">Sustainable Production</span></div>
+  </div>
+</div>
+
+<!-- CARE ROUTINE -->
+<section class="care-section">
+  <div class="care-img ph-sage" style="background: linear-gradient(135deg,#C8D4C4,#9EB09A);">
+    <div style="display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--serif);font-size:28px;color:#fff;opacity:.7;padding:40px;text-align:center;">
+      Care Routine Photography
+    </div>
+  </div>
+  <div class="care-content">
+    <p class="section-label">Simple &amp; Relaxing</p>
+    <h2 class="section-title">Care <em>Routines</em></h2>
+    <p>Create everyday magic with our easy and effective care routines. Designed for you and your little one to share calm, nourishing moments together.</p>
+    <a href="#" class="view-all">Discover More</a>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles-section">
+  <div class="articles-header">
+    <div>
+      <p class="section-label">Our Journal</p>
+      <h2 class="section-title">Newest <em>Articles</em></h2>
+    </div>
+    <a href="#" class="view-all">Read All Articles</a>
+  </div>
+  <div class="articles-grid">
+    <div class="article-card">
+      <div class="article-img ph-warm" style="background: linear-gradient(145deg,#E8D9CC,#D4C4B4); aspect-ratio:16/9; display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:var(--serif);font-size:22px;color:var(--mid);opacity:.6;">Ingredients Article</span>
+      </div>
+      <p class="article-tag">New</p>
+      <h3>Nature's Best: Learn more about our Ingredients</h3>
+      <p>Discover ALMA Babycare's commitment to quality with our natural ingredients. From nourishing avocado oil to soothing calendula extract, our products provide gentle, effective care.</p>
+      <a href="#" class="read-link">Read Article</a>
+    </div>
+    <div class="article-card">
+      <div class="article-img ph-sage" style="background: linear-gradient(145deg,#C8D4C4,#B4C4B0); aspect-ratio:16/9; display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:var(--serif);font-size:22px;color:#fff;opacity:.6;">Interview Article</span>
+      </div>
+      <p class="article-tag">Interview</p>
+      <h3>From Birth to the First Bath: Midwife Magalie</h3>
+      <p>With three decades of experience, midwife Magalie Ouriachi has guided countless families through the transformative journey from pregnancy to birth.</p>
+      <a href="#" class="read-link">Read Article</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <p class="section-label">Our Origins</p>
+  <h2 class="section-title">The Story <em>behind ALMA</em></h2>
+  <p>Our journey began with a shared vision among passionate women to innovate maternity and baby skincare. Crafted with love in Vienna.</p>
+  <a href="#" class="view-all">Discover More</a>
+  <div class="story-img-row">
+    <div class="story-img ph-warm" style="background: linear-gradient(145deg,#E8D9CC,#C4AE9C);"></div>
+    <div class="story-img ph-sage" style="background: linear-gradient(145deg,#C8D4C4,#A4B8A0);"></div>
+    <div class="story-img ph-blush" style="background: linear-gradient(145deg,#E4CDBF,#C8AFA0);"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div style="text-align:center;margin-bottom:56px;">
+    <p class="section-label">Our Community</p>
+    <h2 class="section-title">What <em>they say</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="testimonial-avatar ph-warm"><span style="font-family:var(--serif)">A</span></div>
+      <p>"Joy is everywhere. It's just a matter of discovering it. I discovered ALMA Babycare for my child and myself."</p>
+      <div class="testimonial-name">Adrijana Juric — Co-Founder</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-avatar ph-sage"><span style="font-family:var(--serif)">T</span></div>
+      <p>"My favourite skincare product since being a mom — for the whole family."</p>
+      <div class="testimonial-name">Tina-Marie Efferl — Interior Designer &amp; Creator</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-avatar ph-blush"><span style="font-family:var(--serif)">C</span></div>
+      <p>"My little girl is my absolute world. I love to nourish her skin with the most precious, high-quality ingredients."</p>
+      <div class="testimonial-name">Carola Pojer — Creator</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-avatar ph-stone"><span style="font-family:var(--serif)">D</span></div>
+      <p>"ALMA Babycare embodies my dedication to crafting organic formulations of utmost quality, purity and gentleness."</p>
+      <div class="testimonial-name">Dr. Doris Brandhuber — Cosmetologist</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-bg"></div>
+  <div class="cta-content">
+    <p class="section-label">Gentle Care</p>
+    <h2 class="section-title" style="color:#fff;">The ritual of care<br><em>with ALMA</em></h2>
+    <p>Gentle, organic formulations crafted for the most precious moments — for you and your little one.</p>
+    <a href="#" class="cta-btn">Go to Shop</a>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta-section">
+  <div class="insta-header">
+    <div>
+      <p class="section-label">Social</p>
+      <h2 class="section-title">Follow us on <em>Instagram</em></h2>
+    </div>
+    <a href="#" class="view-all">@alma.babycare</a>
+  </div>
+  <div class="insta-grid">
+    <div class="insta-item ph-warm" style="background:linear-gradient(145deg,#E8D9CC,#D4C4B4);">
+      <div class="insta-overlay">View Post</div>
+    </div>
+    <div class="insta-item ph-sage" style="background:linear-gradient(145deg,#C8D4C4,#A4B8A0);">
+      <div class="insta-overlay">View Post</div>
+    </div>
+    <div class="insta-item ph-blush" style="background:linear-gradient(145deg,#E4CDBF,#C8AFA0);">
+      <div class="insta-overlay">View Post</div>
+    </div>
+    <div class="insta-item ph-stone" style="background:linear-gradient(145deg,#D8CECC,#C4B8B4);">
+      <div class="insta-overlay">View Post</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <p class="section-label" style="color:rgba(255,255,255,.4);">Stay Connected</p>
+  <h2 class="section-title" style="color:#fff;margin-bottom:16px;">Sign up for our <em>Newsletter</em></h2>
+  <p>Find out in advance about exclusive offers and valuable care tips from our experts. Enjoy a 10% discount on your first order.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe now</button>
+  </div>
+  <p class="newsletter-note">By subscribing you agree to our privacy policy. Unsubscribe at any time.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo"><span>ALMA</span> Babycare</span>
+      <p>Organic Mom &amp; Babycare from Vienna. Crafted with love for the most precious moments of life.</p>
+    </div>
+    <div>
+      <h4>Our Products</h4>
+      <ul>
+        <li><a href="#">Whey Bath</a></li>
+        <li><a href="#">Shampoo</a></li>
+        <li><a href="#">Body Lotion</a></li>
+        <li><a href="#">Oil</a></li>
+        <li><a href="#">Spray</a></li>
+        <li><a href="#">Baby Balm</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>About Us</h4>
+      <ul>
+        <li><a href="#">The Story</a></li>
+        <li><a href="#">Science</a></li>
+        <li><a href="#">Ingredients</a></li>
+        <li><a href="#">Care Routines</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Retailers</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Customer Service</h4>
+      <ul>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Return Policy</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Information</h4>
+      <ul>
+        <li><a href="#">Imprint</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Data Privacy</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ALMA Babycare — All Rights Reserved</span>
+    <span>EN &nbsp;|&nbsp; € &nbsp;|&nbsp; Made with love in Vienna</span>
+  </div>
+</footer>
+
+<script>
+  // ── SINGLE SOURCE OF TRUTH ──────────────────────────────────────────
+  // Edit labels here and they update everywhere: hero buttons + product tags
+  const products = [
+    { name: 'Flow',  label: 'Focus',               slug: 'flow',  color: 'ph-sage',  badgeClass: 'new',  price: '55.00' },
+    { name: 'Heal',  label: 'Immunity & Wellness', slug: 'heal',  color: 'ph-warm',  badgeClass: 'back', price: '42.00' },
+    { name: 'Rest',  label: 'Sleep & Calm',       slug: 'rest',  color: 'ph-stone', badgeClass: 'new',  price: '28.00' },
+    { name: 'Move',  label: 'Energy & Vitality',   slug: 'move',  color: 'ph-blush', badgeClass: '',     price: '45.00' },
+  ];
+  // ────────────────────────────────────────────────────────────────────
+
+  const arrow = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>`;
+
+  // Render hero category buttons
+  document.getElementById('hero-cats').innerHTML = products.map(p => `
+    <a href="https://nativerite.com/${p.slug}" class="hero-cat">
+      ${p.label} ${arrow}
+    </a>
+  `).join('');
+
+  // Render product cards
+  document.getElementById('products-grid').innerHTML = products.map(p => `
+    <a href="https://nativerite.com/${p.slug}" class="product-card">
+      <div class="product-img-wrap">
+        <div class="img-placeholder ${p.color}"><span>${p.name}</span></div>
+        <span class="badge ${p.badgeClass}">${p.label}</span>
+      </div>
+      <div class="product-footer">
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price">${p.price} € incl. VAT</div>
+        </div>
+        <div class="product-btns">
+          <button class="btn-add">Add to Bag</button>
+          <button class="btn-quick">Quick Buy</button>
+        </div>
+      </div>
+    </a>
+  `).join('');
+</script>
+</body>
+</html>
