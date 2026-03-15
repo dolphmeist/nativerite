@@ -315,23 +315,41 @@
   .trust-inner {
     position: relative; z-index: 2;
     max-width: 1300px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 24px;
+    display: flex; align-items: center;
+    justify-content: center;
+    gap: 40px;
   }
-  .trust-divider { color: rgba(255,255,255,0.2); font-size: 20px; }
+  .trust-title {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 16px;
+  }
+  .trust-items {
+    display: flex; align-items: center;
+    justify-content: center;
+    gap: 32px; flex-wrap: wrap;
+  }
   .trust-item {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 14px;
     color: rgba(255,255,255,0.85);
   }
   .trust-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
     font-family: var(--serif);
-    font-size: 32px; font-weight: 300;
-    color: rgba(255,255,255,0.35);
-    line-height: 1;
+    font-size: 16px; font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    flex-shrink: 0;
   }
   .trust-text {
-    font-size: 13px; letter-spacing: 0.05em;
-    font-weight: 300;
+    font-size: 13px; letter-spacing: 0.03em;
+    font-weight: 300; white-space: nowrap;
   }
 
   /* ── CARE ROUTINE ── */
@@ -718,7 +736,10 @@
     .testimonials-grid { grid-template-columns: 1fr; }
     .insta-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-inner { grid-template-columns: 1fr 1fr; }
-    .trust-inner { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .trust-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .trust-title { margin-right: 0; margin-bottom: 4px; }
+    .trust-items { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .trust-text { white-space: normal; }
     .newsletter-form { flex-direction: column; }
     .products-section, .articles-section, .testimonials { padding: 60px 20px; }
     .care-content { padding: 48px 28px; }
@@ -817,7 +838,7 @@
   <div class="products-header">
     <div>
       <p class="section-label">Our Collection</p>
-      <h2 class="section-title">Bestselling <em>products</em></h2>
+      <h2 class="section-title">No ordinary <em>tinctures</em></h2>
     </div>
   </div>
   <div class="products-carousel-wrapper">
@@ -845,15 +866,13 @@
   <div class="trust-bar-video-placeholder"></div>
 
   <div class="trust-inner">
-    <div class="trust-item"><span class="trust-num">1</span><span class="trust-text">Made in Austria</span></div>
-    <span class="trust-divider">|</span>
-    <div class="trust-item"><span class="trust-num">2</span><span class="trust-text">Organic Certified</span></div>
-    <span class="trust-divider">|</span>
-    <div class="trust-item"><span class="trust-num">3</span><span class="trust-text">Clean Natural Skincare</span></div>
-    <span class="trust-divider">|</span>
-    <div class="trust-item"><span class="trust-num">4</span><span class="trust-text">Female Founded</span></div>
-    <span class="trust-divider">|</span>
-    <div class="trust-item"><span class="trust-num">5</span><span class="trust-text">Sustainable Production</span></div>
+    <div class="trust-items">
+      <div class="trust-item"><span class="trust-num">1</span><span class="trust-text">Hand made in London</span></div>
+      <div class="trust-item"><span class="trust-num">2</span><span class="trust-text">7× potency extraction</span></div>
+      <div class="trust-item"><span class="trust-num">3</span><span class="trust-text">Wild &amp; organic</span></div>
+      <div class="trust-item"><span class="trust-num">4</span><span class="trust-text">Only clean, edible ingredients</span></div>
+      <div class="trust-item"><span class="trust-num">5</span><span class="trust-text">Science backed synergy</span></div>
+    </div>
   </div>
 </div>
 
