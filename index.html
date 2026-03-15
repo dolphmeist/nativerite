@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ALMA Babycare – Organic Mom & Babycare</title>
+<title>NativeRite – Live Your Optimal Self</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -357,6 +357,8 @@
   .care-section {
     display: grid; grid-template-columns: 1fr 1fr;
     min-height: 520px;
+    max-width: 1300px;
+    margin: 0 auto;
   }
   .care-img {
     width: 100%; height: 100%;
@@ -751,18 +753,17 @@
 <body>
 
 <!-- ANNOUNCEMENT -->
-<div class="announcement">Spend 150€ and receive a free gift &nbsp;·&nbsp; Free shipping over 50€</div>
+<div class="announcement">Free next day delivery &nbsp;·&nbsp; Subscribe to save 20%</div>
 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a href="#" class="logo">Nativerite</a>
+    <a href="#" class="logo">NativeRite</a>
     <nav>
-      <a href="#">Shop Products</a>
-      <a href="#">Care Routine</a>
-      <a href="#">The Story</a>
-      <a href="#">Science</a>
-      <a href="#">Journal</a>
+      <a href="#products-grid">Collection</a>
+      <a href="https://nativerite.com/about">About</a>
+      <a href="https://nativerite.com/science">Science</a>
+      <a href="https://nativerite.com/journal">Journal</a>
     </nav>
     <!-- Desktop right -->
     <div class="header-right">
@@ -795,11 +796,10 @@
   <div class="mobile-nav-overlay" onclick="document.getElementById('mobileNav').classList.remove('open')"></div>
   <div class="mobile-nav-drawer">
     <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
-    <a href="#">Shop Products</a>
-    <a href="#">Care Routine</a>
-    <a href="#">The Story</a>
-    <a href="#">Science</a>
-    <a href="#">Journal</a>
+    <a href="#products-grid" onclick="document.getElementById('mobileNav').classList.remove('open')">Collection</a>
+    <a href="https://nativerite.com/about">About</a>
+    <a href="https://nativerite.com/science">Science</a>
+    <a href="https://nativerite.com/journal">Journal</a>
   </div>
 </div>
 
@@ -1018,7 +1018,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="logo" style="font-size:18px;">Nativerite</span>
+      <span class="logo" style="font-size:18px;">NativeRite</span>
       <p>Organic Mom &amp; Babycare from Vienna. Crafted with love for the most precious moments of life.</p>
     </div>
     <div>
