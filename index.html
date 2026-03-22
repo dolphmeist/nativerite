@@ -1063,8 +1063,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 ALMA Babycare — All Rights Reserved</span>
-    <span>EN &nbsp;|&nbsp; € &nbsp;|&nbsp; Made with love in Vienna</span>
+    <span>© 2026 NativeRite — All Rights Reserved</span>
+    <span>EN &nbsp;|&nbsp; € &nbsp;|&nbsp; Made with care in London</span>
   </div>
 </footer>
 
@@ -1083,14 +1083,14 @@
 
   // Render hero category buttons
   document.getElementById('hero-cats').innerHTML = products.map(p => `
-    <a href="https://nativerite.com/${p.slug}" class="hero-cat">
+    <a href="/${p.slug}.html" class="hero-cat">
       ${p.label} ${arrow}
     </a>
   `).join('');
 
   // Render product cards
   document.getElementById('products-grid').innerHTML = products.map(p => `
-    <a href="https://nativerite.com/${p.slug}" class="product-card">
+    <a href="/${p.slug}.html" class="product-card">
       <div class="product-img-wrap">
         <div class="img-placeholder ${p.color}"><span>${p.name}</span></div>
         <span class="badge ${p.badgeClass}">${p.label}</span>
