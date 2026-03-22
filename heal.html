@@ -351,7 +351,81 @@
     font-size: 8px; font-weight: 500; color: var(--sage);
     flex-shrink: 0; letter-spacing: 0;
   }
-  @keyframes trustFadeIn {
+  /* ── MOBILE PRODUCT CARD ── */
+  .mobile-product-card { display: none; }
+  .mobile-img-wrap {
+    position: relative; width: 100%;
+    aspect-ratio: 1; overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 0;
+  }
+  .mobile-img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mobile-add-btn {
+    position: absolute; top: 14px; right: 14px;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    position: absolute; top: 14px; right: 14px;
+    flex-direction: column; gap: 1px;
+  }
+  .mobile-add-plus {
+    font-size: 10px; font-weight: 600; color: var(--dark);
+    line-height: 1; margin-top: -2px;
+  }
+  .mobile-img-overlay {
+    position: absolute; bottom: 14px; left: 14px; right: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .mobile-buy-btn {
+    flex: 1; display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border: none; border-radius: 50px; cursor: pointer;
+    font-family: var(--sans); font-size: 14px;
+    color: var(--dark); font-weight: 400;
+  }
+  .mobile-price-pill {
+    padding: 14px 20px;
+    background: var(--dark); color: #fff;
+    border-radius: 50px; font-family: var(--serif);
+    font-size: 16px; font-weight: 300;
+    white-space: nowrap;
+  }
+  .mobile-product-info {
+    padding: 16px 4px 0;
+  }
+  .mobile-product-meta {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 12px;
+  }
+  .mobile-product-text { flex: 1; min-width: 0; }
+  .mobile-product-name {
+    font-family: var(--sans); font-size: 20px;
+    font-weight: 500; color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .mobile-trust-carousel {
+    font-size: 13px; color: var(--mid);
+    min-height: 20px;
+  }
+  #mobileTrustText { transition: opacity .4s; }
+  .mobile-rating-circle {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1.5px solid var(--blush);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 15px;
+    color: var(--dark); flex-shrink: 0;
+    text-decoration: none; transition: border-color .2s;
+  }
+  .mobile-rating-circle:hover { border-color: var(--dark); }
+
+  .trust-badges-mobile { display: none; }
     from { opacity: 0; transform: translateY(4px); }
     to   { opacity: 1; transform: translateY(0); }
   }
@@ -367,37 +441,10 @@
     .header-right { display: none; }
     .mobile-header-icons { display: flex; }
 
-    /* Product layout */
-    .product-page { grid-template-columns: 1fr; padding: 0 0 60px; gap: 0; }
-    .gallery { position: static; }
-    .breadcrumb { padding: 12px 20px; }
-
-    /* Gallery — full width square, no rounded corners, hide thumbnails */
-    .gallery-main { border-radius: 0; margin-bottom: 0; aspect-ratio: 1; }
-    .gallery-thumbs { display: none; }
-
-    /* Product info — comfortable padding */
-    .product-info { padding: 24px 20px 0; }
-    .product-name { font-size: 38px; }
-    .product-subtitle { font-size: 14px; }
-
-    /* Trust badges — hide default row, show carousel instead */
-    .trust-badges { display: none; }
-    .trust-badges-mobile {
-      display: flex; align-items: center; gap: 8px;
-      padding: 16px 0;
-      border-top: 1px solid var(--blush);
-      border-bottom: 1px solid var(--blush);
-      margin-bottom: 24px;
-      min-height: 52px;
-    }
-    .trust-badge-mobile {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 13px; color: var(--mid);
-      animation: none;
-      white-space: nowrap;
-    }
-    .trust-badge-mobile svg { color: var(--sage); flex-shrink: 0; }
+    /* Show mobile card, hide desktop layout */
+    .mobile-product-card { display: block; padding: 16px 16px 0; }
+    .breadcrumb-desktop { display: none; }
+    .product-page { display: none; }
 
     /* Tabs */
     .product-tabs-section { padding: 0 20px 48px; }
@@ -409,6 +456,7 @@
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
     .testimonials-inner { padding: 0 20px; }
+    .testimonials-section { padding: 48px 0; }
 
     /* Footer */
     .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -539,11 +587,46 @@
   </div>
 </div>
 
-<!-- BREADCRUMB -->
-<div class="breadcrumb">
+<!-- BREADCRUMB (desktop only) -->
+<div class="breadcrumb breadcrumb-desktop">
   <a href="index.html">Home</a>
   <span>›</span>
   Heal
+</div>
+
+<!-- MOBILE PRODUCT CARD -->
+<div class="mobile-product-card">
+  <!-- Image with overlays -->
+  <div class="mobile-img-wrap">
+    <div class="mobile-img-placeholder ph-warm" id="mobileMainImg">
+      <span style="font-family:var(--serif);font-size:18px;color:var(--mid);opacity:.4;">Product Image</span>
+    </div>
+    <!-- Add to bag icon top right -->
+    <button class="mobile-add-btn" aria-label="Add to bag">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="mobile-add-plus">+</span>
+    </button>
+    <!-- Bottom overlay: Buy now + price -->
+    <div class="mobile-img-overlay">
+      <button class="mobile-buy-btn">
+        Buy now
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </button>
+      <div class="mobile-price-pill">£42.00</div>
+    </div>
+  </div>
+  <!-- Info below image -->
+  <div class="mobile-product-info">
+    <div class="mobile-product-meta">
+      <div class="mobile-product-text">
+        <div class="mobile-product-name">Heal</div>
+        <div class="mobile-trust-carousel" id="mobileTrustCarousel">
+          <span id="mobileTrustText">Immunity &amp; Wellness</span>
+        </div>
+      </div>
+      <a href="#reviews" class="mobile-rating-circle">4.8</a>
+    </div>
+  </div>
 </div>
 
 <!-- PRODUCT PAGE -->
@@ -840,7 +923,27 @@
     selectThumb(next);
   }
 
-  // ── Mobile Trust Badge Carousel ──
+  // ── Mobile Trust Carousel ──
+  const mobileTrustItems = [
+    'Immunity &amp; Wellness',
+    'Wild &amp; Organic',
+    'Only edible ingredients',
+    'Science Backed',
+  ];
+  let mobileTrustIndex = 0;
+  const mobileTrustEl = document.getElementById('mobileTrustText');
+  if (mobileTrustEl) {
+    setInterval(() => {
+      mobileTrustEl.style.opacity = '0';
+      setTimeout(() => {
+        mobileTrustIndex = (mobileTrustIndex + 1) % mobileTrustItems.length;
+        mobileTrustEl.innerHTML = mobileTrustItems[mobileTrustIndex];
+        mobileTrustEl.style.opacity = '1';
+      }, 400);
+    }, 2500);
+  }
+
+  // ── Mobile Trust Badge Carousel (old - kept for fallback) ──
   const trustBadges = [
     { icon: `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`, text: 'Wild & Organic' },
     { icon: `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8 12l3 3 5-5"/></svg>`, text: 'Only edible ingredients' },
