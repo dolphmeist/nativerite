@@ -379,7 +379,7 @@
   }
   .mobile-img-overlay {
     position: absolute; bottom: 14px; left: 14px; right: 14px;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: stretch; gap: 10px;
   }
   .mobile-buy-btn {
     flex: 1; display: flex; align-items: center; justify-content: space-between;
@@ -396,6 +396,8 @@
     border-radius: 50px; font-family: var(--serif);
     font-size: 16px; font-weight: 300;
     white-space: nowrap;
+    display: flex; align-items: center; justify-content: center;
+    height: 100%;
   }
   .mobile-product-info {
     padding: 12px 0 0;
@@ -405,15 +407,17 @@
     background: #fff;
     border-radius: 20px;
     padding: 18px 20px;
+    width: 100%;
   }
   .mobile-product-meta {
     display: flex; align-items: center;
     justify-content: space-between; gap: 12px;
+    margin-bottom: 12px;
   }
   .mobile-product-desc {
     font-size: 14px; color: var(--mid);
-    line-height: 1.7; padding: 0 4px;
-    margin-bottom: 8px;
+    line-height: 1.7;
+    margin: 0;
   }
   .mobile-product-text { flex: 1; min-width: 0; }
   .mobile-product-name {
@@ -602,7 +606,7 @@
 <div class="mobile-product-card">
   <!-- Image with overlays -->
   <div class="mobile-img-wrap">
-    <img src="packaging_sample.webp" alt="Heal" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <img src="packaging%20sample.webp" alt="Heal" style="width:100%;height:100%;object-fit:cover;display:block;">
     <!-- Add to bag icon top right -->
     <button class="mobile-add-btn" aria-label="Add to bag">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -619,7 +623,6 @@
   </div>
   <!-- Info below image -->
   <div class="mobile-product-info">
-    <!-- Title card (rounded box) -->
     <div class="mobile-title-card">
       <div class="mobile-product-meta">
         <div class="mobile-product-text">
@@ -630,9 +633,8 @@
         </div>
         <a href="#reviews" class="mobile-rating-circle">4.8</a>
       </div>
+      <p class="mobile-product-desc">A potent 7× extraction tincture crafted to support your immune system and build lasting resilience — naturally, every day.</p>
     </div>
-    <!-- Short description -->
-    <p class="mobile-product-desc">A potent 7× extraction tincture crafted to support your immune system and build lasting resilience — naturally, every day.</p>
   </div>
 </div>
 
@@ -643,7 +645,7 @@
   <div class="gallery">
     <div class="gallery-main">
       <div class="gallery-main-img" id="mainImg">
-        <img src="packaging_sample.webp" alt="Heal" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="packaging%20sample.webp" alt="Heal" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <button class="gallery-arrow prev" onclick="changeSlide(-1)">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 16 16"><line x1="10" y1="3" x2="4" y2="8"/><line x1="4" y1="8" x2="10" y2="13"/></svg>
@@ -653,11 +655,11 @@
       </button>
     </div>
     <div class="gallery-thumbs">
-      <div class="gallery-thumb active" onclick="selectThumb(0)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging_sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
-      <div class="gallery-thumb" onclick="selectThumb(1)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging_sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
-      <div class="gallery-thumb" onclick="selectThumb(2)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging_sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
-      <div class="gallery-thumb" onclick="selectThumb(3)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging_sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
-      <div class="gallery-thumb" onclick="selectThumb(4)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging_sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
+      <div class="gallery-thumb active" onclick="selectThumb(0)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging%20sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
+      <div class="gallery-thumb" onclick="selectThumb(1)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging%20sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
+      <div class="gallery-thumb" onclick="selectThumb(2)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging%20sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
+      <div class="gallery-thumb" onclick="selectThumb(3)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging%20sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
+      <div class="gallery-thumb" onclick="selectThumb(4)"><div class="gallery-thumb-inner" style="background:none;"><img src="packaging%20sample.webp" style="width:100%;height:100%;object-fit:cover;"></div></div>
     </div>
   </div>
 
@@ -941,6 +943,7 @@
 
     if (isMobile) {
       mobileCard.style.display = 'block';
+      mobileCard.style.padding = '16px 16px 0';
       desktopPage.style.display = 'none';
       if (breadcrumb) breadcrumb.style.display = 'none';
       mobileIcons.style.display = 'flex';
