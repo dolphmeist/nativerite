@@ -359,6 +359,29 @@
     border-radius: 20px;
     margin-bottom: 0;
   }
+  .mobile-img-slides {
+    display: flex; width: 100%; height: 100%;
+    transition: transform .35s cubic-bezier(.25,.46,.45,.94);
+  }
+  .mobile-img-slides img {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .mobile-img-dots {
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; align-items: center;
+    z-index: 3;
+  }
+  .mobile-img-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none; cursor: pointer; padding: 0;
+    transition: background .2s, transform .2s;
+  }
+  .mobile-img-dot.active {
+    background: rgba(255,255,255,0.95);
+    transform: scale(1.2);
+  }
   .mobile-img-placeholder {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -437,7 +460,7 @@
     min-height: 20px;
   }
   #mobileTrustText { transition: opacity .4s; }
-  .mobile-stars {
+  *:focus, *:focus-visible { outline: none; }
     display: flex; align-items: center; gap: 6px;
     text-decoration: none; padding: 0 4px;
   }
@@ -459,10 +482,10 @@
     .mobile-header-icons { display: flex; }
     /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
-    .product-tabs-section { padding: 0 20px 48px; }
+    .product-tabs-section { padding: 0 16px 48px; }
     .tab-nav { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
     .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { padding: 14px 20px; font-size: 13px; }
+    .tab-btn { padding: 14px 12px; font-size: 13px; }
     .tab-content { text-align: left; }
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
@@ -607,8 +630,17 @@
 <!-- MOBILE PRODUCT CARD -->
 <div class="mobile-product-card">
   <!-- Image with overlays -->
-  <div class="mobile-img-wrap">
-    <img src="packagingsample.webp" alt="Heal" style="width:100%;height:100%;object-fit:cover;display:block;">
+  <div class="mobile-img-wrap" id="mobileImgWrap">
+    <!-- Dot indicators -->
+    <div class="mobile-img-dots" id="mobileImgDots"></div>
+    <!-- Slides -->
+    <div class="mobile-img-slides" id="mobileImgSlides">
+      <img src="packagingsample.webp" alt="Heal">
+      <img src="packagingsample.webp" alt="Heal">
+      <img src="packagingsample.webp" alt="Heal">
+      <img src="packagingsample.webp" alt="Heal">
+      <img src="packagingsample.webp" alt="Heal">
+    </div>
     <!-- Bottom overlay: Buy now + price -->
     <div class="mobile-img-overlay">
       <button class="mobile-buy-btn">
@@ -942,6 +974,34 @@
   function changeSlide(dir) {
     const next = (current + dir + 5) % 5;
     selectThumb(next);
+  }
+
+  // ── Mobile Image Swipe ──
+  const mobileSlides = document.getElementById('mobileImgSlides');
+  const mobileDotsEl = document.getElementById('mobileImgDots');
+  if (mobileSlides && mobileDotsEl) {
+    const slideCount = mobileSlides.querySelectorAll('img').length;
+    let mobileSlideIndex = 0;
+    for (let i = 0; i < slideCount; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'mobile-img-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goToMobileSlide(i);
+      mobileDotsEl.appendChild(dot);
+    }
+    function goToMobileSlide(index) {
+      mobileSlideIndex = index;
+      mobileSlides.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.mobile-img-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+    let touchStartX = 0;
+    mobileSlides.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    mobileSlides.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0 && mobileSlideIndex < slideCount - 1) goToMobileSlide(mobileSlideIndex + 1);
+        if (diff < 0 && mobileSlideIndex > 0) goToMobileSlide(mobileSlideIndex - 1);
+      }
+    });
   }
 
   // ── Layout switching (JS-based for reliability) ──
