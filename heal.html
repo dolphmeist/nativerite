@@ -401,7 +401,8 @@
   }
   .mobile-product-info {
     padding: 12px 0 0;
-    display: flex; flex-direction: column; gap: 14px;
+    display: flex; flex-direction: column; gap: 16px;
+    margin-bottom: 32px;
   }
   .mobile-title-card {
     background: #fff;
@@ -412,12 +413,10 @@
   .mobile-product-meta {
     display: flex; align-items: center;
     justify-content: space-between; gap: 12px;
-    margin-bottom: 12px;
   }
   .mobile-product-desc {
     font-size: 14px; color: var(--mid);
-    line-height: 1.7;
-    margin: 0;
+    line-height: 1.7; padding: 0 4px;
   }
   .mobile-product-text { flex: 1; min-width: 0; }
   .mobile-product-name {
@@ -623,6 +622,7 @@
   </div>
   <!-- Info below image -->
   <div class="mobile-product-info">
+    <!-- Rounded title card -->
     <div class="mobile-title-card">
       <div class="mobile-product-meta">
         <div class="mobile-product-text">
@@ -633,8 +633,9 @@
         </div>
         <a href="#reviews" class="mobile-rating-circle">4.8</a>
       </div>
-      <p class="mobile-product-desc">A potent 7× extraction tincture crafted to support your immune system and build lasting resilience — naturally, every day.</p>
     </div>
+    <!-- Short description outside the card -->
+    <p class="mobile-product-desc">A potent 7× extraction tincture crafted to support your immune system and build lasting resilience — naturally, every day.</p>
   </div>
 </div>
 
