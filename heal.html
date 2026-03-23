@@ -28,6 +28,12 @@
     background: var(--dark); color: #fff;
     text-align: center; padding: 10px 20px;
     font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    white-space: nowrap; overflow: hidden;
+  }
+  .announcement-text { display: inline; }
+  @media (max-width: 768px) {
+    .announcement { padding: 10px 16px; }
+    .announcement-text { transition: opacity .4s; }
   }
 
   /* ── HEADER ── */
@@ -483,9 +489,9 @@
     /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
     .product-tabs-section { padding: 0 16px 48px; }
-    .tab-nav { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+    .tab-nav { justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
     .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { padding: 14px 12px; font-size: 13px; }
+    .tab-btn { padding: 14px 8px; font-size: 12px; flex: 1; text-align: center; }
     .tab-content { text-align: left; }
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
@@ -574,7 +580,7 @@
 <body>
 
 <!-- ANNOUNCEMENT -->
-<div class="announcement">Free next day delivery &nbsp;·&nbsp; Subscribe to save 20%</div>
+<div class="announcement"><span class="announcement-text" id="announcementText">Free next day delivery &nbsp;·&nbsp; Subscribe to save 20%</span></div>
 
 <!-- HEADER -->
 <header>
@@ -974,6 +980,24 @@
   function changeSlide(dir) {
     const next = (current + dir + 5) % 5;
     selectThumb(next);
+  }
+
+  // ── Announcement Carousel (mobile) ──
+  const announcementItems = [
+    'Free next day delivery',
+    'Subscribe to save 20%',
+  ];
+  const announcementEl = document.getElementById('announcementText');
+  if (announcementEl && window.innerWidth <= 768) {
+    let annIndex = 0;
+    setInterval(() => {
+      announcementEl.style.opacity = '0';
+      setTimeout(() => {
+        annIndex = (annIndex + 1) % announcementItems.length;
+        announcementEl.textContent = announcementItems[annIndex];
+        announcementEl.style.opacity = '1';
+      }, 400);
+    }, 3000);
   }
 
   // ── Mobile Image Swipe ──
