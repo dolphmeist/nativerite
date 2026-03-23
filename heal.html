@@ -384,21 +384,24 @@
   .mobile-buy-btn {
     flex: 1; display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(150,144,138,0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: none; border-radius: 50px; cursor: pointer;
     font-family: var(--sans); font-size: 14px;
-    color: var(--dark); font-weight: 400;
+    color: #fff; font-weight: 400;
+    letter-spacing: 0.02em;
   }
-  .mobile-price-pill {
-    padding: 14px 20px;
-    background: var(--dark); color: #fff;
-    border-radius: 50px; font-family: var(--serif);
-    font-size: 16px; font-weight: 300;
-    white-space: nowrap;
-    display: flex; align-items: center; justify-content: center;
-    height: 100%;
+  .mobile-add-basket-btn {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: #fff;
+    border: none; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 2px; color: var(--dark);
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
   }
+  .mobile-price-pill { display: none; }
   .mobile-product-info {
     padding: 12px 0 0;
     display: flex; flex-direction: column; gap: 16px;
@@ -413,6 +416,11 @@
   .mobile-product-meta {
     display: flex; align-items: center;
     justify-content: space-between; gap: 12px;
+  }
+  .mobile-product-price {
+    font-family: var(--serif); font-size: 22px;
+    font-weight: 300; color: var(--dark);
+    flex-shrink: 0;
   }
   .mobile-product-desc {
     font-size: 14px; color: var(--mid);
@@ -429,15 +437,10 @@
     min-height: 20px;
   }
   #mobileTrustText { transition: opacity .4s; }
-  .mobile-rating-circle {
-    width: 48px; height: 48px; border-radius: 50%;
-    border: 1.5px solid var(--blush);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 15px;
-    color: var(--dark); flex-shrink: 0;
-    text-decoration: none; transition: border-color .2s;
+  .mobile-stars {
+    display: flex; align-items: center; gap: 6px;
+    text-decoration: none; padding: 0 4px;
   }
-  .mobile-rating-circle:hover { border-color: var(--dark); }
 
   .trust-badges-mobile { display: none; }
     from { opacity: 0; transform: translateY(4px); }
@@ -606,18 +609,16 @@
   <!-- Image with overlays -->
   <div class="mobile-img-wrap">
     <img src="packaging%20sample.webp" alt="Heal" style="width:100%;height:100%;object-fit:cover;display:block;">
-    <!-- Add to bag icon top right -->
-    <button class="mobile-add-btn" aria-label="Add to bag">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span class="mobile-add-plus">+</span>
-    </button>
     <!-- Bottom overlay: Buy now + price -->
     <div class="mobile-img-overlay">
       <button class="mobile-buy-btn">
         Buy now
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
       </button>
-      <div class="mobile-price-pill">£42.00</div>
+      <button class="mobile-add-basket-btn" aria-label="Add to bag">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span style="font-size:13px;font-weight:600;line-height:1;color:var(--dark);">+</span>
+      </button>
     </div>
   </div>
   <!-- Info below image -->
@@ -631,11 +632,22 @@
             <span id="mobileTrustText">Immunity &amp; Wellness</span>
           </div>
         </div>
-        <a href="#reviews" class="mobile-rating-circle">4.8</a>
+        <div class="mobile-product-price">£42</div>
       </div>
     </div>
     <!-- Short description outside the card -->
     <p class="mobile-product-desc">A potent 7× extraction tincture crafted to support your immune system and build lasting resilience — naturally, every day.</p>
+    <!-- Stars -->
+    <a href="#reviews" class="mobile-stars">
+      <div class="star-icons">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star half">★</span>
+      </div>
+      <span class="stars-label" id="reviewCountMobile"></span>
+    </a>
   </div>
 </div>
 
@@ -1012,6 +1024,8 @@
 
   // Populate review count dynamically
   document.getElementById('reviewCount').textContent = `4.8 Stars · ${totalReviews} review${totalReviews !== 1 ? 's' : ''}`;
+  const mobileCount = document.getElementById('reviewCountMobile');
+  if (mobileCount) mobileCount.textContent = `4.8 Stars · ${totalReviews} review${totalReviews !== 1 ? 's' : ''}`;
 
   // Build dots
   for (let i = 0; i < totalSlides; i++) {
