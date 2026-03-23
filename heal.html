@@ -440,24 +440,16 @@
     nav { display: none; }
     .header-right { display: none; }
     .mobile-header-icons { display: flex; }
-
-    /* Show mobile card, hide desktop layout */
-    .mobile-product-card { display: block; padding: 16px 16px 0; }
-    .breadcrumb-desktop { display: none; }
-    .product-page { display: none; }
-
     /* Tabs */
     .product-tabs-section { padding: 0 20px 48px; }
     .tab-nav { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
     .tab-nav::-webkit-scrollbar { display: none; }
     .tab-btn { padding: 14px 20px; font-size: 13px; }
     .tab-content { text-align: left; }
-
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
     .testimonials-inner { padding: 0 20px; }
     .testimonials-section { padding: 48px 0; }
-
     /* Footer */
     .footer-inner { grid-template-columns: 1fr 1fr; }
     footer { padding: 48px 20px 32px; }
@@ -923,7 +915,34 @@
     selectThumb(next);
   }
 
-  // ── Mobile Trust Carousel ──
+  // ── Layout switching (JS-based for reliability) ──
+  function applyLayout() {
+    const isMobile = window.innerWidth <= 768;
+    const mobileCard = document.querySelector('.mobile-product-card');
+    const desktopPage = document.querySelector('.product-page');
+    const breadcrumb = document.querySelector('.breadcrumb-desktop');
+    const mobileIcons = document.querySelector('.mobile-header-icons');
+    const desktopRight = document.querySelector('.header-right');
+    const desktopNav = document.querySelector('nav');
+
+    if (isMobile) {
+      mobileCard.style.display = 'block';
+      desktopPage.style.display = 'none';
+      if (breadcrumb) breadcrumb.style.display = 'none';
+      mobileIcons.style.display = 'flex';
+      desktopRight.style.display = 'none';
+      desktopNav.style.display = 'none';
+    } else {
+      mobileCard.style.display = 'none';
+      desktopPage.style.display = 'grid';
+      if (breadcrumb) breadcrumb.style.display = 'flex';
+      mobileIcons.style.display = 'none';
+      desktopRight.style.display = 'flex';
+      desktopNav.style.display = 'flex';
+    }
+  }
+  applyLayout();
+  window.addEventListener('resize', applyLayout);
   const mobileTrustItems = [
     'Immunity &amp; Wellness',
     'Wild &amp; Organic',
