@@ -316,13 +316,17 @@
     transition: color .2s;
   }
   .tab-btn::after {
-    content: ''; position: absolute;
-    bottom: -1px; left: 0; right: 0; height: 2px;
-    background: var(--dark); transform: scaleX(0);
-    transition: transform .25s;
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%; transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--dark);
+    transition: width .25s;
   }
   .tab-btn.active { color: var(--dark); }
-  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn.active::after { width: 100%; }
   .tab-btn:hover { color: var(--dark); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
@@ -494,9 +498,8 @@
     /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
     .product-tabs-section { padding: 0 16px 48px; }
-    .tab-nav { justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
-    .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { padding: 14px 4px; font-size: 12px; flex: 1; text-align: center; letter-spacing: 0.02em; }
+    .tab-nav { justify-content: space-around; }
+    .tab-btn { padding: 14px 6px; font-size: 13px; flex: 1; text-align: center; letter-spacing: 0; }
     .tab-content { text-align: left; }
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
@@ -1002,7 +1005,7 @@
         announcementEl.textContent = announcementItems[annIndex];
         announcementEl.style.opacity = '1';
       }, 400);
-    }, 3000);
+    }, 2000);
   }
 
   // ── Mobile Image Swipe ──
@@ -1078,7 +1081,7 @@
         mobileTrustEl.innerHTML = mobileTrustItems[mobileTrustIndex];
         mobileTrustEl.style.opacity = '1';
       }, 400);
-    }, 2500);
+    }, 2000);
   }
 
   // ── Mobile Trust Badge Carousel (old - kept for fallback) ──
@@ -1101,7 +1104,7 @@
         setTimeout(() => trustEl.classList.remove('fade-in'), 500);
       }, 400);
     }
-    setInterval(cycleTrustBadge, 2500);
+    setInterval(cycleTrustBadge, 2000);
   }
   let reviewIndex = 0;
   const track = document.getElementById('reviewsTrack');
