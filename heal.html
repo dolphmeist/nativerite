@@ -315,18 +315,20 @@
     position: relative; white-space: nowrap;
     transition: color .2s;
   }
-  .tab-btn::after {
+  .tab-btn::after { display: none; }
+  .tab-label {
+    display: inline-block;
+    position: relative; padding-bottom: 4px;
+  }
+  .tab-label::after {
     content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%; transform: translateX(-50%);
-    width: 0;
-    height: 2px;
+    position: absolute; bottom: -17px; left: 0;
+    width: 0; height: 2px;
     background: var(--dark);
     transition: width .25s;
   }
   .tab-btn.active { color: var(--dark); }
-  .tab-btn.active::after { width: 100%; }
+  .tab-btn.active .tab-label::after { width: 100%; }
   .tab-btn:hover { color: var(--dark); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
@@ -795,9 +797,9 @@
 <!-- TABS - full width below product columns -->
 <div class="product-tabs-section">
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab(this, 'tab-special')">Description</button>
-    <button class="tab-btn" onclick="switchTab(this, 'tab-how')">Use</button>
-    <button class="tab-btn" onclick="switchTab(this, 'tab-ingredients')">Ingredients</button>
+    <button class="tab-btn active" onclick="switchTab(this, 'tab-special')"><span class="tab-label">Description</span></button>
+    <button class="tab-btn" onclick="switchTab(this, 'tab-how')"><span class="tab-label">Use</span></button>
+    <button class="tab-btn" onclick="switchTab(this, 'tab-ingredients')"><span class="tab-label">Ingredients</span></button>
   </div>
   <div class="tab-content">
     <div class="tab-panel active" id="tab-special">
