@@ -514,7 +514,7 @@
     .mobile-header-icons { display: flex; }
     /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
-    .product-tabs-section { padding: 0 20px 48px; }
+    .product-tabs-section { padding: 0 20px 0 !important; }
     .desktop-tabs { display: none; }
     .mobile-accordion { display: block; }
     .tab-content { text-align: left; }
@@ -860,6 +860,19 @@
       <p>Our 7× potency extraction process concentrates the active compounds to levels far beyond standard tinctures.</p>
       <p style="margin-top:12px;">Hand-crafted in small batches in London using only wild-harvested and certified organic botanicals — every bottle is a precise synergy of nature and science.</p>
       <p style="margin-top:12px;">Unlike mass-produced supplements, each batch is tested for potency and purity before it leaves our hands. No fillers, no shortcuts, no compromise.</p>
+      <div class="special-video-placeholder" style="margin-top:20px;">
+        <!--
+          TO ADD YOUR VIDEO: replace the placeholder below with:
+          <video autoplay muted loop playsinline>
+            <source src="your-special-video.mp4" type="video/mp4">
+          </video>
+        -->
+        <svg width="44" height="44" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="28" cy="28" r="26"/>
+          <polygon points="22,18 42,28 22,38" fill="currentColor" stroke="none"/>
+        </svg>
+        <span>Your video goes here</span>
+      </div>
     </div>
   </div>
   <div class="mob-acc-item">
@@ -885,9 +898,6 @@
   </div>
 </div>
 
-</div>
-
-</div>
 </div>
 
 <!-- TESTIMONIALS -->
@@ -1053,7 +1063,7 @@
         announcementEl.textContent = announcementItems[annIndex];
         announcementEl.style.opacity = '1';
       }, 400);
-    }, 3000);
+    }, 2000);
   }
 
   // ── Mobile Image Swipe ──
@@ -1093,6 +1103,8 @@
     const mobileIcons = document.querySelector('.mobile-header-icons');
     const desktopRight = document.querySelector('.header-right');
     const desktopNav = document.querySelector('nav');
+    const desktopTabs = document.querySelector('.desktop-tabs');
+    const mobileAccordion = document.querySelector('.mobile-accordion');
 
     if (isMobile) {
       mobileCard.style.display = 'block';
@@ -1102,6 +1114,8 @@
       mobileIcons.style.display = 'flex';
       desktopRight.style.display = 'none';
       desktopNav.style.display = 'none';
+      if (desktopTabs) desktopTabs.style.display = 'none';
+      if (mobileAccordion) mobileAccordion.style.display = 'block';
     } else {
       mobileCard.style.display = 'none';
       desktopPage.style.display = 'grid';
@@ -1109,6 +1123,8 @@
       mobileIcons.style.display = 'none';
       desktopRight.style.display = 'flex';
       desktopNav.style.display = 'flex';
+      if (desktopTabs) desktopTabs.style.display = 'block';
+      if (mobileAccordion) mobileAccordion.style.display = 'none';
     }
   }
   applyLayout();
@@ -1129,7 +1145,7 @@
         mobileTrustEl.innerHTML = mobileTrustItems[mobileTrustIndex];
         mobileTrustEl.style.opacity = '1';
       }, 400);
-    }, 2500);
+    }, 2000);
   }
 
   // ── Mobile Trust Badge Carousel (old - kept for fallback) ──
@@ -1152,7 +1168,7 @@
         setTimeout(() => trustEl.classList.remove('fade-in'), 500);
       }, 400);
     }
-    setInterval(cycleTrustBadge, 2500);
+    setInterval(cycleTrustBadge, 2000);
   }
   let reviewIndex = 0;
   const track = document.getElementById('reviewsTrack');
