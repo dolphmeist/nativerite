@@ -491,42 +491,12 @@
     nav { display: none; }
     .header-right { display: none; }
     .mobile-header-icons { display: flex; }
-    /* Tabs — accordion on mobile */
+    /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
     .product-tabs-section { padding: 0 16px 48px; }
-    /* Hide horizontal tab nav on mobile */
-    .tab-nav { display: none; }
-    /* Accordion styles */
-    .accordion-item {
-      border-bottom: 1px solid var(--blush);
-    }
-    .accordion-item:first-child {
-      border-top: 1px solid var(--blush);
-    }
-    .accordion-trigger {
-      width: 100%;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 0;
-      background: none; border: none; cursor: pointer;
-      font-family: var(--sans); font-size: 14px; font-weight: 500;
-      color: var(--dark); letter-spacing: 0.03em;
-      text-align: left;
-    }
-    .accordion-trigger .acc-icon {
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
-      color: var(--mid);
-    }
-    .accordion-trigger.open .acc-icon {
-      transform: rotate(45deg);
-    }
-    .accordion-body {
-      display: none;
-      padding: 0 0 20px;
-    }
-    .accordion-body.open {
-      display: block;
-    }
+    .tab-nav { justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn { padding: 14px 4px; font-size: 12px; flex: 1; text-align: center; letter-spacing: 0.02em; }
     .tab-content { text-align: left; }
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
@@ -826,31 +796,6 @@
     <button class="tab-btn" onclick="switchTab(this, 'tab-how')">Use</button>
     <button class="tab-btn" onclick="switchTab(this, 'tab-ingredients')">Ingredients</button>
   </div>
-  <!-- Mobile Accordion (hidden on desktop via JS) -->
-  <div class="accordion-list" id="accordionList" style="display:none;">
-    <div class="accordion-item">
-      <button class="accordion-trigger open" data-target="acc-special">
-        Description
-        <svg class="acc-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
-      <div class="accordion-body open" id="acc-special"></div>
-    </div>
-    <div class="accordion-item">
-      <button class="accordion-trigger" data-target="acc-how">
-        Use
-        <svg class="acc-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
-      <div class="accordion-body" id="acc-how"></div>
-    </div>
-    <div class="accordion-item">
-      <button class="accordion-trigger" data-target="acc-ingredients">
-        Ingredients
-        <svg class="acc-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
-      <div class="accordion-body" id="acc-ingredients"></div>
-    </div>
-  </div>
-
   <div class="tab-content">
     <div class="tab-panel active" id="tab-special">
       <div class="special-layout">
@@ -1048,7 +993,7 @@
     'Subscribe to save 20%',
   ];
   const announcementEl = document.getElementById('announcementText');
-  if (announcementEl) {
+  if (announcementEl && window.innerWidth <= 768) {
     let annIndex = 0;
     setInterval(() => {
       announcementEl.style.opacity = '0';
@@ -1057,7 +1002,7 @@
         announcementEl.textContent = announcementItems[annIndex];
         announcementEl.style.opacity = '1';
       }, 400);
-    }, 2000);
+    }, 3000);
   }
 
   // ── Mobile Image Swipe ──
@@ -1133,7 +1078,7 @@
         mobileTrustEl.innerHTML = mobileTrustItems[mobileTrustIndex];
         mobileTrustEl.style.opacity = '1';
       }, 400);
-    }, 2000);
+    }, 2500);
   }
 
   // ── Mobile Trust Badge Carousel (old - kept for fallback) ──
@@ -1156,7 +1101,7 @@
         setTimeout(() => trustEl.classList.remove('fade-in'), 500);
       }, 400);
     }
-    setInterval(cycleTrustBadge, 2000);
+    setInterval(cycleTrustBadge, 2500);
   }
   let reviewIndex = 0;
   const track = document.getElementById('reviewsTrack');
@@ -1187,51 +1132,6 @@
   }
 
   function scrollReviews(dir) { goToReview(reviewIndex + dir); }
-
-  // ── Accordion (mobile tabs) ──
-  function initAccordion() {
-    const isMobile = window.innerWidth <= 768;
-    const tabContent = document.querySelector('.tab-content');
-    const accordionList = document.getElementById('accordionList');
-    if (!accordionList || !tabContent) return;
-
-    if (isMobile) {
-      // Show accordion, hide desktop tab-content
-      accordionList.style.display = 'block';
-      tabContent.style.display = 'none';
-      // Clone tab panel content into accordion bodies (once)
-      const map = { 'acc-special': 'tab-special', 'acc-how': 'tab-how', 'acc-ingredients': 'tab-ingredients' };
-      Object.entries(map).forEach(([accId, tabId]) => {
-        const body = document.getElementById(accId);
-        const panel = document.getElementById(tabId);
-        if (body && panel && body.innerHTML.trim() === '') {
-          body.innerHTML = panel.innerHTML;
-        }
-      });
-    } else {
-      accordionList.style.display = 'none';
-      tabContent.style.display = 'block';
-    }
-  }
-
-  document.addEventListener('click', function(e) {
-    const trigger = e.target.closest('.accordion-trigger');
-    if (!trigger) return;
-    const targetId = trigger.getAttribute('data-target');
-    const body = document.getElementById(targetId);
-    const isOpen = trigger.classList.contains('open');
-    // Close all
-    document.querySelectorAll('.accordion-trigger').forEach(t => t.classList.remove('open'));
-    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
-    // Toggle clicked
-    if (!isOpen) {
-      trigger.classList.add('open');
-      if (body) body.classList.add('open');
-    }
-  });
-
-  initAccordion();
-  window.addEventListener('resize', initAccordion);
 
   // ── Tabs ──
   function switchTab(btn, panelId) {
