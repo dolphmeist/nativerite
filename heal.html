@@ -476,7 +476,28 @@
     text-decoration: none; padding: 0 4px;
   }
 
-  .trust-badges-mobile { display: none; }
+  /* ── MOBILE ACCORDION ── */
+  .mobile-accordion { display: none; }
+  .mob-acc-item { border-bottom: 1px solid var(--blush); }
+  .mob-acc-btn {
+    width: 100%; display: flex; justify-content: space-between;
+    align-items: center; padding: 18px 0;
+    background: none; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 15px;
+    color: var(--dark); text-align: left; font-weight: 400;
+  }
+  .mob-acc-icon {
+    font-size: 22px; color: var(--mid); line-height: 1;
+    transition: transform .3s; flex-shrink: 0;
+  }
+  .mob-acc-btn.open .mob-acc-icon { transform: rotate(45deg); }
+  .mob-acc-body {
+    display: none; padding: 0 0 18px;
+    font-size: 14px; color: var(--mid); line-height: 1.8;
+  }
+  .mob-acc-body.open { display: block; }
+  .mob-acc-body ul { padding-left: 20px; }
+  .mob-acc-body ul li { margin-bottom: 6px; }
     from { opacity: 0; transform: translateY(4px); }
     to   { opacity: 1; transform: translateY(0); }
   }
@@ -493,10 +514,9 @@
     .mobile-header-icons { display: flex; }
     /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
-    .product-tabs-section { padding: 0 16px 48px; }
-    .tab-nav { justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
-    .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { padding: 14px 4px; font-size: 12px; flex: 1; text-align: center; letter-spacing: 0.02em; }
+    .product-tabs-section { padding: 0 20px 48px; }
+    .desktop-tabs { display: none; }
+    .mobile-accordion { display: block; }
     .tab-content { text-align: left; }
     /* Reviews */
     .review-card { flex: 0 0 85vw; }
@@ -789,8 +809,9 @@
 </div>
 
 <div class="product-tabs-outer">
-<!-- TABS - full width below product columns -->
-<div class="product-tabs-section">
+
+<!-- TABS (desktop) -->
+<div class="product-tabs-section desktop-tabs">
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchTab(this, 'tab-special')">Description</button>
     <button class="tab-btn" onclick="switchTab(this, 'tab-how')">Use</button>
@@ -805,12 +826,6 @@
           <p>Unlike mass-produced supplements, each batch is tested for potency and purity before it leaves our hands. No fillers, no shortcuts, no compromise.</p>
         </div>
         <div class="special-video">
-          <!--
-            TO ADD YOUR VIDEO: replace the placeholder below with:
-            <video autoplay muted loop playsinline>
-              <source src="your-special-video.mp4" type="video/mp4">
-            </video>
-          -->
           <div class="special-video-placeholder">
             <svg width="44" height="44" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5">
               <circle cx="28" cy="28" r="26"/>
@@ -834,6 +849,42 @@
     </div>
   </div>
 </div>
+
+<!-- ACCORDION (mobile) -->
+<div class="product-tabs-section mobile-accordion">
+  <div class="mob-acc-item">
+    <button class="mob-acc-btn" onclick="toggleMobAcc(this)">
+      Description <span class="mob-acc-icon">+</span>
+    </button>
+    <div class="mob-acc-body">
+      <p>Our 7× potency extraction process concentrates the active compounds to levels far beyond standard tinctures.</p>
+      <p style="margin-top:12px;">Hand-crafted in small batches in London using only wild-harvested and certified organic botanicals — every bottle is a precise synergy of nature and science.</p>
+      <p style="margin-top:12px;">Unlike mass-produced supplements, each batch is tested for potency and purity before it leaves our hands. No fillers, no shortcuts, no compromise.</p>
+    </div>
+  </div>
+  <div class="mob-acc-item">
+    <button class="mob-acc-btn" onclick="toggleMobAcc(this)">
+      Use <span class="mob-acc-icon">+</span>
+    </button>
+    <div class="mob-acc-body">
+      <ul>
+        <li>Take 2ml (approx. 40 drops) daily</li>
+        <li>Add to water, juice, or take directly under the tongue</li>
+        <li>Best taken in the morning on an empty stomach</li>
+        <li>For optimal results, use consistently for 4–6 weeks</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mob-acc-item">
+    <button class="mob-acc-btn" onclick="toggleMobAcc(this)">
+      Ingredients <span class="mob-acc-icon">+</span>
+    </button>
+    <div class="mob-acc-body">
+      Astragalus Root Extract, Elderberry (Sambucus nigra), Echinacea purpurea, Reishi Mushroom (Ganoderma lucidum), Organic Vegetable Glycerin, Distilled Water. All ingredients are either wild-harvested or certified organic. No fillers, no additives.
+    </div>
+  </div>
+</div>
+
 </div>
 
 </div>
@@ -1132,6 +1183,14 @@
   }
 
   function scrollReviews(dir) { goToReview(reviewIndex + dir); }
+
+  function toggleMobAcc(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.mob-acc-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.mob-acc-btn').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+  }
 
   // ── Tabs ──
   function switchTab(btn, panelId) {
