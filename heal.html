@@ -526,8 +526,8 @@
     .mobile-header-icons { display: flex; }
     /* Tabs */
     .product-tabs-outer { margin-top: 28px; }
-    .product-tabs-section { padding: 20px !important; border-radius: 20px; }
-    .mobile-accordion { border-radius: 20px; }
+    .product-tabs-section { padding: 20px !important; border-radius: 20px; overflow: hidden; }
+    .mobile-accordion { border-radius: 20px; overflow: hidden; }
     .desktop-tabs { display: none; }
     .mobile-accordion { display: block; }
     .tab-content { text-align: left; }
@@ -1115,7 +1115,11 @@
       desktopRight.style.display = 'none';
       desktopNav.style.display = 'none';
       if (desktopTabs) desktopTabs.style.display = 'none';
-      if (mobileAccordion) mobileAccordion.style.display = 'block';
+      if (mobileAccordion) {
+        mobileAccordion.style.display = 'block';
+        mobileAccordion.style.borderRadius = '20px';
+        mobileAccordion.style.overflow = 'hidden';
+      }
     } else {
       mobileCard.style.display = 'none';
       desktopPage.style.display = 'grid';
