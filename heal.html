@@ -1117,8 +1117,12 @@
       if (desktopTabs) desktopTabs.style.display = 'none';
       if (mobileAccordion) {
         mobileAccordion.style.display = 'block';
-        mobileAccordion.style.borderRadius = '20px';
-        mobileAccordion.style.overflow = 'hidden';
+      }
+      const tabsOuter = document.querySelector('.product-tabs-outer');
+      if (tabsOuter) {
+        tabsOuter.style.borderRadius = '20px 20px 0 0';
+        tabsOuter.style.overflow = 'hidden';
+        tabsOuter.style.marginTop = '28px';
       }
     } else {
       mobileCard.style.display = 'none';
